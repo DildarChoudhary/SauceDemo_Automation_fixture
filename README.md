@@ -86,3 +86,4 @@ Open `reports/report.html` in a browser to view the results.
 
 Automation Framework: Python + Playwright + Pytest
 Automation Framework: Python + Playwright + Pytest1
+Automation Framework: Python + Playwright + Pytest2
