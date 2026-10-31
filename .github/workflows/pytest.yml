@@ -38,4 +38,13 @@ jobs:
       - name: Run Automation Tests
         run: python -m pytest Tests -v
 
-
+      # Step 6: Upload HTML Report and Screenshots
+      - name: Upload Test Reports and Screenshots
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-test-reports
+          path: |
+            reports/
+            screenshots/
+          if-no-files-found: warn
