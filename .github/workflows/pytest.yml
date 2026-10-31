@@ -1,7 +1,7 @@
-# Workflow ka naam
+# Workflow Name
 name: SauceDemo Automation Tests
 
-# Workflow kab execute hoga
+# Workflow Trigger
 on:
   push:
     branches: [ main ]
@@ -9,34 +9,34 @@ on:
   pull_request:
     branches: [ main ]
 
-# Workflow jobs
+# Workflow Jobs
 jobs:
   test:
-    # GitHub ka Windows runner use hoga
+    # GitHub Windows Runner
     runs-on: windows-latest
 
     steps:
-      # Step 1: GitHub repository ka code download
+      # Step 1: Checkout Repository
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Step 2: Python setup
+      # Step 2: Setup Python
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.13"
 
-      # Step 3: Python dependencies install
+      # Step 3: Install Dependencies
       - name: Install Dependencies
         run: python -m pip install -r requirements.txt
 
-      # Step 4: Playwright browsers install
+      # Step 4: Install Playwright Browsers
       - name: Install Playwright Browsers
         run: python -m playwright install chromium firefox webkit
 
-      # Step 5: Pytest automation tests execute
+      # Step 5: Run Automation Tests and Generate HTML Report
       - name: Run Automation Tests
-        run: python -m pytest Tests -v
+        run: python -m pytest Tests -v --html=reports/report.html --self-contained-html
 
       # Step 6: Upload HTML Report and Screenshots
       - name: Upload Test Reports and Screenshots
