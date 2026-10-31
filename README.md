@@ -84,3 +84,5 @@ python -m pytest --html=reports/report.html --self-contained-html
 
 Open `reports/report.html` in a browser to view the results.
 
+Branch protection practice - Pull Request checks verification.
+
