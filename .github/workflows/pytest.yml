@@ -10,10 +10,16 @@ on:
     branches: [ main ]
 
 # Workflow Jobs
+
 jobs:
   test:
-    # GitHub Windows Runner
+    name: Run Tests on ${{ matrix.browser }}
     runs-on: windows-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
 
     steps:
       # Step 1: Checkout Repository
@@ -30,21 +36,22 @@ jobs:
       - name: Install Dependencies
         run: python -m pip install -r requirements.txt
 
-      # Step 4: Install Playwright Browsers
-      - name: Install Playwright Browsers
-        run: python -m playwright install chromium firefox webkit
+      # Step 4: Install Current Browser
+      - name: Install Playwright Browser
+        run: python -m playwright install ${{ matrix.browser }}
 
-      # Step 5: Run Automation Tests and Generate HTML Report
+      # Step 5: Run Browser Tests
       - name: Run Automation Tests
-        run: python -m pytest Tests -v --html=reports/report.html --self-contained-html
+        run: python -m pytest Tests -v --browser ${{ matrix.browser }} --html=reports/report-${{ matrix.browser }}.html --self-contained-html
 
-      # Step 6: Upload HTML Report and Screenshots
+      # Step 6: Upload Reports and Screenshots
       - name: Upload Test Reports and Screenshots
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-test-reports
+          name: playwright-report-${{ matrix.browser }}
           path: |
             reports/
             screenshots/
           if-no-files-found: warn
+
