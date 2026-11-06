@@ -67,6 +67,6 @@ def test_cancel_checkout_overview(checkout_overview_page):
 
     # Verify karna ki user products page per wapas aagaya
     #assert page.locator(".title").inner_text() == "Products"
-    expect(page.locator("title")).to_have_text("Products")
+    expect(page.locator(".title")).to_have_text("Products")
 
     print(" Cancel Checkout Overview Test passed")
