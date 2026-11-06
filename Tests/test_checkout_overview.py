@@ -70,3 +70,4 @@ def test_cancel_checkout_overview(checkout_overview_page):
     expect(page.locator(".title")).to_have_text("Products")
 
     print(" Cancel Checkout Overview Test passed")
+    print(" Cancel Checkout Overview Test passed")
